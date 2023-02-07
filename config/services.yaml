@@ -18,12 +18,8 @@ services:
         exclude:
             - '../src/**/*Exception.php'
             - '../src/**/*View.php'
-            - '../src/**/Application/*Command.php'
-            - '../src/**/Application/*Handler.php'
+            - '../src/**/Application/Command/*Command.php'
             - '../src/**/Domain/Entity/**'
             - '../src/**/Domain/Enum/**'
+            - '../src/**/Domain/ValueObject/**'
             - '../src/Kernel.php'
-
-#    App\Company\UserInterface\Api\Controller\:
-#        resource: '../src/Company/UserInterface/Api/Controller/'
-#        tags: ['controller.service_arguments']

@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Policy\Domain\Entity\AbstractSalaryBonusPolicy"
+            table="salary_bonus_policy"
+            inheritance-type="JOINED"
+            repository-class="App\Policy\Infrastructure\Repository\SalaryBonusPolicyDoctrineRepository">
+        <discriminator-column name="type" type="string" />
+        <discriminator-map>
+            <discriminator-mapping value="percentage-bonus"
+                                   class="App\Policy\Domain\Entity\PercentageSalaryBonusPolicy" />
+            <discriminator-mapping value="per-year-employed-bonus"
+                                   class="App\Policy\Domain\Entity\PerYearEmployedSalaryBonusPolicy" />
+        </discriminator-map>
+        <id name="id" type="string" length="36" />
+    </entity>
+</doctrine-mapping>

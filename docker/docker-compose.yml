@@ -24,6 +24,8 @@ services:
       - ./nginx/sites-available:/etc/nginx/sites-available:ro
 
   php:
+    build:
+      context: ./php
     command: php-fpm
     container_name: jb_payroll_php
     deploy:
@@ -34,7 +36,7 @@ services:
     environment:
       - COMPOSER_HOME=/tmp/composer
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/var/www/payroll/bin
-    image: php:8-fpm-alpine
+    image: payroll-php:8-fpm-alpine
     user: "${UID}:${GID}"
     volumes:
       - ../:/var/www/payroll

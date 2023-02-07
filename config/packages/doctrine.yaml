@@ -1,7 +1,6 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-        schema_filter: '~^(?!messenger_messages)~'
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -10,8 +9,38 @@ doctrine:
             CompanyEntity:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/config/doctrine/CompanyEntity'
+                dir: '%kernel.project_dir%/config/doctrine/Company/Entity'
                 prefix: App\Company\Domain\Entity
+            ContractEntity:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/Contract/Entity'
+                prefix: App\Contract\Domain\Entity
+            ContractValueObject:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/Contract/ValueObject'
+                prefix: App\Contract\Domain\ValueObject
+            EmployeeEntity:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/Employee/Entity'
+                prefix: App\Employee\Domain\Entity
+            PayrollEntity:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/Payroll/Entity'
+                prefix: App\Payroll\Domain\Entity
+            PayrollValueObject:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/Payroll/ValueObject'
+                prefix: App\Payroll\Domain\ValueObject
+            PolicyEntity:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/doctrine/Policy/Entity'
+                prefix: App\Policy\Domain\Entity
 
 when@test:
     doctrine:

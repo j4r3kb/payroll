@@ -1,0 +1,18 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Contract\Domain\Entity\Contract"
+            table="contract"
+            repository-class="App\Contract\Infrastructure\Doctrine\DoctrineContractRepository">
+        <id name="id" type="string" length="36" />
+        <field name="companyId" type="string" length="36" />
+        <field name="departmentId" type="string" length="36" />
+        <field name="employeeId" type="string" length="36" />
+        <field name="salaryBonusPolicyId" type="string" length="36" nullable="true" />
+        <embedded name="salary" class="App\Contract\Domain\ValueObject\Salary" column-prefix="salary_" />
+        <embedded name="duration"
+                  class="App\Contract\Domain\ValueObject\ContractDuration"
+                  use-column-prefix="false" />
+    </entity>
+</doctrine-mapping>

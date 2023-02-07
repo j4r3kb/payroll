@@ -1,0 +1,20 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Payroll\Domain\Entity\PayrollItem"
+            table="payroll_item">
+        <id name="id" type="string" length="36" />
+        <field name="firstName" type="string" />
+        <field name="lastName" type="string" />
+        <field name="departmentName" type="string" />
+        <field name="salaryBase" type="integer" />
+        <field name="salaryBonus" type="integer" />
+        <field name="salaryTotal" type="integer" />
+        <field name="salaryCurrency" type="string" />
+        <field name="salaryBonusType" type="string" />
+        <many-to-one field="payroll" target-entity="App\Payroll\Domain\Entity\Payroll" inversed-by="items">
+            <join-column name="payroll_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

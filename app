@@ -8,7 +8,7 @@ ${LBLUE}restart${NC}  restart all project's containers
 ${LBLUE}recreate${NC} recreate all project's containers
 ${LBLUE}shell${NC}    enter PHP container's shell
 ${LBLUE}php${NC}      run PHP commands
-${LBLUE}phpunit${NC}  run PHP Unit bridge commands
+${LBLUE}tests${NC}    run PHP Unit bridge commands
 ${LBLUE}composer${NC} run Composer commands
 ${LBLUE}console${NC}  run Symfony console commands"
 
@@ -48,7 +48,7 @@ case "$action" in
   php )
     shift
     eval "docker exec -it -u ${UID} -w /var/www/${dir} ${container_php} php ${@}" ;;
-  phpunit )
+  tests )
     shift
     eval "docker exec --env-file ../.env.test -it -u ${UID} -w /var/www/${dir} ${container_php} \
           php vendor/bin/simple-phpunit --testdox ${@}" ;;

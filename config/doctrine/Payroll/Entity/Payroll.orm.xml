@@ -1,0 +1,20 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Payroll\Domain\Entity\Payroll"
+            table="payroll"
+            repository-class="App\Payroll\Infrastructure\Doctrine\DoctrinePayrollRepository">
+        <id name="id" type="string" length="36" />
+        <field name="companyId" type="string" length="36" />
+        <field name="companyName" type="string" />
+        <embedded name="period" class="App\Payroll\Domain\ValueObject\PayrollPeriod" use-column-prefix="false" />
+        <field name="createdAt" type="datetime" />
+        <one-to-many field="items" target-entity="App\Payroll\Domain\Entity\PayrollItem" mapped-by="payroll">
+            <cascade>
+                <cascade-persist />
+                <cascade-remove />
+            </cascade>
+        </one-to-many>
+    </entity>
+</doctrine-mapping>
