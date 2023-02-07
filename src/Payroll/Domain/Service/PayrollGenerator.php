@@ -13,6 +13,7 @@ use App\Payroll\Domain\Entity\Payroll;
 use App\Payroll\Domain\Entity\PayrollItem;
 use App\Payroll\Domain\Repository\PayrollRepository;
 use App\Payroll\Domain\ValueObject\PayrollPeriod;
+use App\Policy\Domain\Entity\NoSalaryBonusPolicy;
 use App\Policy\Domain\Repository\SalaryBonusPolicyRepository;
 
 class PayrollGenerator
@@ -36,12 +37,17 @@ class PayrollGenerator
 
         $payroll = Payroll::create($companyId, $company->name, $payrollPeriod);
         $payrollDate = $payrollPeriod->toDate();
+        $noSalaryBonusPolicy = NoSalaryBonusPolicy::create();
         $activeContracts = $this->contractRepository->findActiveForCompany($companyId, $payrollPeriod);
 
         foreach ($activeContracts as $contract) {
             $departmentName = $company->departmentName($contract->departmentId());
             $employee = $this->employeeRepository->findOne($contract->employeeId());
-            $salaryBonusPolicy = $this->salaryBonusPolicyRepository->findOne($contract->salaryBonusPolicyId());
+            if ($contract->salaryBonusPolicyId()) {
+                $salaryBonusPolicy = $this->salaryBonusPolicyRepository->findOne($contract->salaryBonusPolicyId());
+            } else {
+                $salaryBonusPolicy = $noSalaryBonusPolicy;
+            }
             $salaryBonus = $salaryBonusPolicy->calculateBonusFor($contract, $payrollDate)
                 ->getAmount()->toInt()
             ;
