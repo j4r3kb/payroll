@@ -16,3 +16,4 @@
 * `./app console contract:sign`
 * `./app console payroll:generate` then `./app console messenger:consume async`
 * `./app console payroll:view`
+* `./app stop`
