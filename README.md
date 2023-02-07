@@ -14,6 +14,6 @@
 * `./app console company:department:add`
 * `./app console employee:add`
 * `./app console contract:sign`
-* `./app console payroll:generate` then `./app console messenger:consume async`
+* `./app console payroll:generate` then `./app console messenger:consume async --limit=1`
 * `./app console payroll:view`
 * `./app stop`
